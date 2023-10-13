@@ -13,6 +13,9 @@ function setup() {
       pyenv install "$PYTHON_VERSION"
   fi
 
+  # Update poetry itself.
+  poetry self update
+
   # Set local python version to the target version.
   pyenv local "$PYTHON_VERSION"
 
