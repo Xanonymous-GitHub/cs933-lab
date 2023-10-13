@@ -195,10 +195,7 @@ files = [
 ]
 
 [package.dependencies]
-numpy = [
-    {version = ">=1.16,<2.0", markers = "python_version <= \"3.11\""},
-    {version = ">=1.26.0rc1,<2.0", markers = "python_version >= \"3.12\""},
-]
+numpy = {version = ">=1.26.0rc1,<2.0", markers = "python_version >= \"3.12\""}
 
 [package.extras]
 bokeh = ["bokeh", "selenium"]
@@ -1204,5 +1201,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = ">=3.11,<3.13"
-content-hash = "7769ce48a7a4e4c25f887c547d07a315bfcba0883657a9bc4dbf5b222e55c554"
+python-versions = ">=3.12,<3.13"
+content-hash = "c1f82a64b1d67d9b713efa2fa616fd7da08f912dd0486f443aff3b57d04500d5"
