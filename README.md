@@ -6,6 +6,7 @@
 
 1. Clone the repository
 2. Install [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer)
+3. Install [Pyenv](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation)
 
 #### Setup the environment
 
