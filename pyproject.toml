@@ -12,8 +12,10 @@ numpy = "^1.26.0"
 
 
 [tool.poetry.group.dev.dependencies]
-ipykernel = "^6.25.2"
+notebook = "^7.0.5"
 nbclassic = "^1.0.0"
+jupyter-collaboration = "^1.2.0"
+jupyterlab-night = "^0.4.6"
 
 [build-system]
 requires = ["poetry-core"]
