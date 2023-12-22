@@ -1,0 +1,26 @@
+<annotation>
+	<folder>COMPONENTS</folder>
+	<filename>TRANSISTOR-3.jpg</filename>
+	<path>/Users/abhir/Desktop/AOI/data/COMPONENTS/TRANSISTOR-3.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1960</width>
+		<height>1308</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>bbox</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>835</xmin>
+			<ymin>525</ymin>
+			<xmax>1057</xmax>
+			<ymax>728</ymax>
+		</bndbox>
+	</object>
+</annotation>

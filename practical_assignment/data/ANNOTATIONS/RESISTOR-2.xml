@@ -1,0 +1,26 @@
+<annotation>
+	<folder>COMPONENTS</folder>
+	<filename>RESISTOR-2.jpg</filename>
+	<path>/Users/abhir/Desktop/AOI/data/COMPONENTS/RESISTOR-2.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1960</width>
+		<height>1308</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>bbox</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>888</xmin>
+			<ymin>573</ymin>
+			<xmax>1020</xmax>
+			<ymax>690</ymax>
+		</bndbox>
+	</object>
+</annotation>
