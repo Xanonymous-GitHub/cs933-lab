@@ -6,9 +6,29 @@ from PIL import Image
 
 class _FileAgent:
     __data_dir: Final[str]
+    __RESISTOR_DIR_NAME: Final[str] = "RESISTORS"
+    __COMPONENTS_DIR_NAME: Final[str] = "COMPONENTS"
+    __BOARDS_DIR_NAME: Final[str] = "BOARDS"
+    __ANNOTATION_DIR_NAME: Final[str] = "ANNOTATIONS"
 
     def __init__(self, *, data_dir: str):
         self.__data_dir = data_dir
+
+    @property
+    def resistor_dir(self) -> str:
+        return f"{self.__data_dir}/{self.__RESISTOR_DIR_NAME}"
+
+    @property
+    def components_dir(self) -> str:
+        return f"{self.__data_dir}/{self.__COMPONENTS_DIR_NAME}"
+
+    @property
+    def boards_dir(self) -> str:
+        return f"{self.__data_dir}/{self.__BOARDS_DIR_NAME}"
+
+    @property
+    def annotation_dir(self) -> str:
+        return f"{self.__data_dir}/{self.__ANNOTATION_DIR_NAME}"
 
     def get_img_located_at(
             self,
