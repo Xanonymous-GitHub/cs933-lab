@@ -30,8 +30,8 @@ def find_principal_axes_from(image_: np.ndarray) -> np.ndarray:
         image_: 2D numpy array representing an image.
 
     Returns:
-        p_axes: The eigenvector corresponding to the largest eigenvalue, which
-        represents the direction of the principal axis.
+        two points representing the principal axis of the labeled region.
+        connect these points to visualize the principal axis.
     """
     # Check that the provided image array is two-dimensional.
     if image_.ndim != 2:
@@ -66,7 +66,16 @@ def find_principal_axes_from(image_: np.ndarray) -> np.ndarray:
     # which is the direction along which the pixels are most spread out.
     principal_axis = eigenvectors[0, :] if eigenvalues[0] > eigenvalues[1] else eigenvectors[1, :]
 
-    return principal_axis
+    # From the centroid, extend the principal axis to the edge of the image,
+    # and return the coordinates of the two points.
+    def get_x_of_principal_axis_line_at(y: float):
+        return (y - centroid_y_) / principal_axis[1] * principal_axis[0] + centroid_x_
+
+    return np.array([
+        [get_x_of_principal_axis_line_at(0), 0],
+        [get_x_of_principal_axis_line_at(image_.shape[0]), image_.shape[0]]
+    ], dtype=np.float32)
+
 
 
 # Reduce color followed by the ratio.
