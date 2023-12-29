@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 
 
 # find the coordinate bounding box of a given label in a components image
@@ -50,3 +51,31 @@ def find_bounding_box_from(
 
     # find min and max extents of coordinates
     return np.min(where_x), np.min(where_y), np.max(where_x), np.max(where_y)
+
+
+# rotate each of the image according to the central line.
+# the central line will become straight and perpendicular to vertical after rotation.
+# Rotate along the axis so that the slope of the axis becomes infinite.
+# If the slope of the original axis is positive, it rotates counterclockwise; if it is negative, it rotates clockwise.
+def rotate_image(
+        img: np.ndarray,
+        central_line_: [[float, float], [float, float]],
+        centroid_: [float, float],
+) -> np.ndarray:
+    a, b = central_line_
+
+    ax, ay = a
+    bx, by = b
+
+    # Calculate the angle of the central line
+    angle = np.arctan2(by - ay, bx - ax) * 180 / np.pi
+
+    # rotate the image by the angle, in clockwise direction
+    # the center of rotation is the center of the image
+    return cv2.warpAffine(
+        src=img,
+        M=cv2.getRotationMatrix2D(
+            (centroid_[0], centroid_[1]), angle - 90, 1.0
+        ),
+        dsize=(img.shape[1], img.shape[0])
+    )

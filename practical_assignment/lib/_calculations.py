@@ -1,5 +1,5 @@
-import numpy as np
 import cv2
+import numpy as np
 
 
 def find_centroid_from(image_: np.ndarray, /) -> np.ndarray:
@@ -77,7 +77,6 @@ def find_principal_axes_from(image_: np.ndarray) -> np.ndarray:
     ], dtype=np.float32)
 
 
-
 # Reduce color followed by the ratio.
 def reduce_color(img: np.ndarray, /, *, to: int) -> np.ndarray:
     # Reshape the image to a 2D array of pixels and 3 color values (RGB)
@@ -98,3 +97,39 @@ def reduce_color(img: np.ndarray, /, *, to: int) -> np.ndarray:
 
     # Reshape back to the original image dimension
     return reduced_img.reshape(img.shape)
+
+
+def central_line_of(img: np.ndarray) -> tuple[[float, float], [float, float]]:
+    if len(img.shape) > 2:
+        raise ValueError("The input image should be a grayscale image.")
+
+    a, b = find_principal_axes_from(img)
+
+    # Flip the central line horizontally to make it parallel to the resistor's body
+    a[0] = img.shape[1] - a[0]
+    b[0] = img.shape[1] - b[0]
+
+    return a, b
+
+
+def crop_img_to_fixed_size(img: np.ndarray, crop_size_x: int, crop_size_y: int) -> np.ndarray:
+    # Find the central point of the resistor
+    # If the image is RGB, convert it to grayscale first.
+    if len(img.shape) > 2:
+        img_tmp = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    else:
+        img_tmp = img.copy()
+    central_point = find_centroid_from(img_tmp)
+
+    half_crop_size_x = crop_size_x // 2
+    half_crop_size_y = crop_size_y // 2
+
+    # Crop the resistor to a fixed size
+    return (
+        img[
+            int(central_point[1] - half_crop_size_y):
+            int(central_point[1] + half_crop_size_y),
+            int(central_point[0] - half_crop_size_x):
+            int(central_point[0] + half_crop_size_x),
+        ]
+    )
