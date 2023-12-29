@@ -133,3 +133,15 @@ def crop_img_to_fixed_size(img: np.ndarray, crop_size_x: int, crop_size_y: int) 
             int(central_point[0] + half_crop_size_x),
         ]
     )
+
+
+def vertical_color_distribution_of(img: np.ndarray) -> np.ndarray:
+    color_distribution = np.zeros((dim := img.shape[2], img.shape[0]), dtype=int)
+    # Analyze color distribution
+    for layer in range(dim):
+        for _y in range(img.shape[0]):
+            # Calculate the mean color of all pixels in current y row.
+            mean_color = np.mean(img[_y, :, layer], axis=0)
+            color_distribution[layer, _y] = mean_color
+
+    return color_distribution

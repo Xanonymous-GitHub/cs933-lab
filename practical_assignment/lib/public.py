@@ -1,34 +1,18 @@
 from typing import Final
 
-import cv2
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import numpy as np
-from PIL import ImageEnhance
-from skimage import measure
-from skimage.restoration import inpaint
-from sklearn.cluster import KMeans
-
-from ._box import find_bounding_box_from, rotate_image
+from ._box import find_bounding_box_from, rotate_image, find_single_components_in
 from ._file import _FileAgent
-from ._presentation import show_images_in_row, draw_central_line_on
+from ._presentation import show_images_in_row, draw_central_line_on, show_vertical_rgb_analysis_of
 from ._calculations import (
     find_principal_axes_from,
     find_centroid_from,
     central_line_of,
     crop_img_to_fixed_size,
+    vertical_color_distribution_of,
 )
 
 __all__ = [
-    "np",
-    "plt",
-    "mpl",
-    "measure",
-    "cv2",
     "db",
-    "inpaint",
-    "KMeans",
-    "ImageEnhance",
     "find_bounding_box_from",
     "show_images_in_row",
     "find_principal_axes_from",
@@ -37,6 +21,9 @@ __all__ = [
     "draw_central_line_on",
     "rotate_image",
     "crop_img_to_fixed_size",
+    "find_single_components_in",
+    "vertical_color_distribution_of",
+    "show_vertical_rgb_analysis_of",
 ]
 
 db: Final[_FileAgent] = _FileAgent(data_dir="data_dir")

@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from skimage import measure
 
 
 # find the coordinate bounding box of a given label in a components image
@@ -79,3 +80,51 @@ def rotate_image(
         ),
         dsize=(img.shape[1], img.shape[0])
     )
+
+
+def find_single_components_in(img: np.ndarray) -> [np.ndarray, ...]:
+    gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    threshed_img = np.zeros(gray_img.shape, np.uint8)
+    threshed_img[gray_img < 245] = 1
+
+    labeled_component_set = measure.label(threshed_img, background=0)
+    labels_of_component = np.unique(labeled_component_set)
+
+    min_size = 100
+
+    separated_components: [np.ndarray] = []
+    separated_components_binary: [np.ndarray] = []
+
+    # Skip the first label, which is the background.
+    for the_label in labels_of_component[1:]:
+        left, top, right, bottom = find_bounding_box_from(
+            labeled_component_set, label=the_label
+        )
+
+        # separate each component into single image.
+        # create a shape=3 zero array, and set the target resistor to 1
+        target_component = np.full_like(img, 255)
+        target_component_binary = np.zeros_like(gray_img)
+
+        # Copy the target component to the target_component array
+        target_component[labeled_component_set == the_label] = img[
+            labeled_component_set == the_label
+        ]
+        target_component_binary[labeled_component_set == the_label] = 1
+
+        # cut the target component image size to the size of the component
+        target_component = target_component[top:bottom, left:right]
+        target_component_binary = target_component_binary[top:bottom, left:right]
+
+        # measure its size
+        n = np.count_nonzero(target_component)
+
+        # plot as image if it's big enough (greater than min_size)
+        if n > min_size:
+            separated_components.append(
+                cv2.cvtColor(target_component, cv2.COLOR_BGR2RGB)
+            )
+            separated_components_binary.append(target_component_binary)
+
+    return separated_components, separated_components_binary
