@@ -126,3 +126,17 @@ def find_single_components_in(img: np.ndarray, bg_threshold: int = 245, min_size
             separated_components_binary.append(target_component_binary)
 
     return separated_components, separated_components_binary
+
+
+def rotate_img_by_angle(img: np.ndarray, angle: float) -> np.ndarray:
+    # rotate the image by the angle, in clockwise direction
+    # the center of rotation is the center of the image
+    return cv2.warpAffine(
+        src=img,
+        M=cv2.getRotationMatrix2D(
+            (img.shape[1] / 2, img.shape[0] / 2), angle, 1.0
+        ),
+        dsize=(img.shape[1], img.shape[0]),
+        borderMode=cv2.BORDER_CONSTANT,
+        borderValue=[255, 255, 255]
+    )

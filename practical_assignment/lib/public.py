@@ -1,6 +1,6 @@
 from typing import Final
 
-from ._box import find_bounding_box_from, rotate_image, find_single_components_in
+from ._box import find_bounding_box_from, rotate_image, find_single_components_in, rotate_img_by_angle
 from ._file import _FileAgent
 from ._presentation import show_images_in_row, draw_central_line_on, show_vertical_rgb_analysis_of
 from ._calculations import (
@@ -26,6 +26,7 @@ __all__ = [
     "vertical_color_distribution_of",
     "show_vertical_rgb_analysis_of",
     "remove_shadow_from",
+    "rotate_img_by_angle",
 ]
 
 db: Final[_FileAgent] = _FileAgent(data_dir="data_dir")
