@@ -1,3 +1,4 @@
+import os
 from typing import Final
 
 import numpy as np
@@ -46,3 +47,10 @@ class _FileAgent:
             img = img.convert(channel_mode)
 
         return np.asarray(img)
+
+    @staticmethod
+    def check_if_file_exists(file_path: str) -> bool:
+        """
+        Check if the file exists.
+        """
+        return os.path.isfile(file_path)
