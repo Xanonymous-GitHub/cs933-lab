@@ -82,16 +82,14 @@ def rotate_image(
     )
 
 
-def find_single_components_in(img: np.ndarray) -> [np.ndarray, ...]:
+def find_single_components_in(img: np.ndarray, bg_threshold: int = 245, min_size: int = 100) -> [np.ndarray, ...]:
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     threshed_img = np.zeros(gray_img.shape, np.uint8)
-    threshed_img[gray_img < 245] = 1
+    threshed_img[gray_img < bg_threshold] = 1
 
     labeled_component_set = measure.label(threshed_img, background=0)
     labels_of_component = np.unique(labeled_component_set)
-
-    min_size = 100
 
     separated_components: [np.ndarray] = []
     separated_components_binary: [np.ndarray] = []
