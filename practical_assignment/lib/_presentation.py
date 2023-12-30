@@ -3,10 +3,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def show_images_in_row(images: [np.ndarray], /, *, fig_size: tuple[int, int] = (20, 5)) -> None:
+def show_images_in_row(images: [np.ndarray], /, *, fig_size: tuple[int, int] = (20, 5), is_gray: bool = False) -> None:
     _, _axs = plt.subplots(1, len(images), figsize=fig_size)
     for n, component in enumerate(images):
-        _axs[n].imshow(component)
+        _axs[n].imshow(component, cmap="gray" if is_gray else None)
         _axs[n].set_title(f'Image {n + 1}')
 
     plt.show()
