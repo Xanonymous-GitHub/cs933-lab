@@ -9,6 +9,7 @@ from ._calculations import (
     central_line_of,
     crop_img_to_fixed_size,
     vertical_color_distribution_of,
+    remove_shadow_from,
 )
 
 __all__ = [
@@ -24,6 +25,7 @@ __all__ = [
     "find_single_components_in",
     "vertical_color_distribution_of",
     "show_vertical_rgb_analysis_of",
+    "remove_shadow_from",
 ]
 
 db: Final[_FileAgent] = _FileAgent(data_dir="data_dir")

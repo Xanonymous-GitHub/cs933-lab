@@ -145,3 +145,17 @@ def vertical_color_distribution_of(img: np.ndarray) -> np.ndarray:
             color_distribution[layer, _y] = mean_color
 
     return color_distribution
+
+
+def remove_shadow_from(img: np.ndarray, /, *, dilate_size: int = 7, blur_size: int = 21) -> np.ndarray:
+    result_norm_planes = []
+    rgb_planes = cv2.split(img)
+
+    for plane in rgb_planes:
+        dilated_img = cv2.dilate(plane, np.ones((dilate_size, dilate_size), np.uint8))
+        bg_img = cv2.medianBlur(dilated_img, blur_size)
+        diff_img = 255 - cv2.absdiff(plane, bg_img)
+        norm_img = cv2.normalize(diff_img, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX)
+        result_norm_planes.append(norm_img)
+
+    return cv2.merge(result_norm_planes)
