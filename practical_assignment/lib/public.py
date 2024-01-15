@@ -11,6 +11,8 @@ from ._calculations import (
     vertical_color_distribution_of,
     remove_shadow_from,
 )
+from ._color import ResistorColorFinder, ResistorColor
+from ._resistor_value import calculate_resistor_value
 
 __all__ = [
     "db",
@@ -27,6 +29,9 @@ __all__ = [
     "show_vertical_rgb_analysis_of",
     "remove_shadow_from",
     "rotate_img_by_angle",
+    "ResistorColorFinder",
+    "ResistorColor",
+    "calculate_resistor_value",
 ]
 
 db: Final[_FileAgent] = _FileAgent(data_dir="data_dir")
