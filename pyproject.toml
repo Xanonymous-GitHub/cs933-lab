@@ -16,7 +16,7 @@ opencv-python = "^4.8.1.78"
 
 
 [tool.poetry.group.dev.dependencies]
-notebook = "^7.0.5"
+notebook = "^7.0.7"
 nbclassic = "^1.0.0"
 jupyterlab-night = "^0.4.6"
 ruff = "^0.0.292"
